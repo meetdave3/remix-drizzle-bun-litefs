@@ -1,0 +1,27 @@
+# fly.toml app configuration file generated for bun-drizzle-remix on 2024-12-17T21:30:26+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'bun-drizzle-remix'
+primary_region = 'arn'
+
+[build]
+
+[experimental]
+  enable_consul = true
+
+[[mounts]]
+  source = 'litefs'
+  destination = '/var/lib/litefs'
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'
